@@ -40,7 +40,7 @@ public class Assignment3 {
 			//	System.out.println(names);
 			//	String data = myReader.nextLine();
 			//	System.out.println(data);
-			} System.out.println(Arrays.toString(users));
+			} // System.out.println(Arrays.toString(users));
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -59,24 +59,26 @@ public class Assignment3 {
 		 System.out.println("Enter password: ");
 		 inputPassword = scan.next();
 		
-		int chances = 5;
+		int chances = 4; //Java is 0 base indexed
 		 
 		
 			for(int i = 0; i < users.length; i++) {
 			
-			if(user.getUsername() == inputUserName) {
+			if(user.getUsername().contentEquals(inputUserName)) {
 				System.out.println("Welcome " + user.getName());
+				break;
 				
 			}
-			else if (user.getPassword() == inputPassword) {
+			else if (user.getPassword().contentEquals(inputPassword)) {
 				System.out.println("Welcome " + user.getName());
+				break;
 			}
 			else {
 				System.out.println("Invalid login, please try again.");
 				chances--;
 			}
 			
-			if(chances > 0) {
+			if(chances >= 0) {
 				System.out.println("Enter username: ");
 				inputUserName = scan.next();
 				
@@ -84,8 +86,11 @@ public class Assignment3 {
 				 inputPassword = scan.next();
 				
 			}
-			else {
+			
+			
+			if (chances <= 0) {
 				System.out.println("Too many failed login attempts, you are now locked out.");
+				break;
 			}
 			
 		
