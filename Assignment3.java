@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Assignment3 {
 
+	@SuppressWarnings("unlikely-arg-type")
 	public static void main(String[] args) {
 		
 		BufferedReader fileReader = null;
@@ -27,7 +28,7 @@ public class Assignment3 {
 				String password = stringArray[1];  //like username, password, name
 				String names = stringArray[2];
 				
-				
+				user = new UserPOJO();
 				
 				user.setUsername(userNames);
 				user.setPassword(password);
@@ -52,53 +53,44 @@ public class Assignment3 {
 		String inputName;
 		
 		Scanner scan = new Scanner(System.in);
-		
-		System.out.println("Enter username: ");
-		inputUserName = scan.next();
-		
-		 System.out.println("Enter password: ");
-		 inputPassword = scan.next();
-		
-		int chances = 4; //Java is 0 base indexed
+	
+		int chances = 5; //Java is 0 base indexed
 		 
-		
-			for(int i = 0; i < users.length; i++) {
+		while(chances > 0) {
 			
-			if(user.getUsername().contentEquals(inputUserName)) {
-				System.out.println("Welcome " + user.getName());
-				break;
+			System.out.println("Enter username: ");
+			inputUserName = scan.next();
+			
+			 System.out.println("Enter password: ");
+			 inputPassword = scan.next();
+			
+			for(UserPOJO userData : users) {
 				
-			}
-			else if (user.getPassword().contentEquals(inputPassword)) {
-				System.out.println("Welcome " + user.getName());
-				break;
-			}
-			else {
-				System.out.println("Invalid login, please try again.");
-				chances--;
-			}
-			
-			if(chances >= 0) {
-				System.out.println("Enter username: ");
-				inputUserName = scan.next();
 				
-				 System.out.println("Enter password: ");
-				 inputPassword = scan.next();
+				if (inputUserName.equalsIgnoreCase(userData.getUsername()) && inputPassword.equals(userData.getPassword())) {
+					System.out.println("Welcome " + userData.getName());
+					System.exit(0);
+					
+				}
 				
-			}
 			
+		}
+			chances--;
+			if(chances != 0) {
+					
+					System.out.println("Invalid login, please try again.");
+					
+					
+					
+				}
 			
-			if (chances <= 0) {
-				System.out.println("Too many failed login attempts, you are now locked out.");
-				break;
-			}
 			
 		
 			
 		}
 		 
-			
-		
+			System.out.println("Too many failed login attempts, you are now locked out.");
+					
 		
 	
 	}
